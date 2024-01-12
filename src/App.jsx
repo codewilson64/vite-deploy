@@ -1,35 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Navbar from "./Components/Navbar/Navbar";
+import Shop from "./Pages/shop";
+import ShopCategory from "./Pages/ShopCategory";
+import Product from "./Pages/Product";
+import Cart from "./Pages/Cart";
+import LoginSignup from "./Pages/LoginSignup";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Footer from "./Components/Footer/Footer";
+import ps5_banner from "./Components/Assets/banner_ps5.jpg";
+import ps4_banner from "./Components/Assets/banner-ps4.jpg";
+import xbox_banner from "./Components/Assets/banner-xone.jpg";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Shop />} />
+          <Route path="/ps5" element={<ShopCategory banner={ps5_banner} category="ps5" />} />
+          <Route path="/ps4" element={<ShopCategory banner={ps4_banner} category="ps4" />} />
+          <Route path="/xboxone" element={<ShopCategory banner={xbox_banner} category="xbox" />} />
+          <Route path="/product" element={<Product />}>
+            <Route path=":productId" element={<Product />} />
+          </Route>
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/login" element={<LoginSignup />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
